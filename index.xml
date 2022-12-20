@@ -1,0 +1,10 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>YpKilig的小站</title>
+        <link>https://example.com/</link>
+        <description>YpKilig的技术，日常分享</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ypkilig@gmail.com (YpKilig)</managingEditor>
+            <webMaster>ypkilig@gmail.com (YpKilig)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+            <atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" />
+        </channel>
+</rss>
