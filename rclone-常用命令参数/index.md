@@ -165,7 +165,7 @@ rclone copy 配置名称:网盘路径 配置名称:网盘路径 --drive-server-s
 | RCLONE_CACHE_CHUNK_TOTAL_SIZE | 块可以在本地磁盘上占用的总大小，默认10G                      |
 | RCLONE_IGNORE_ERRORS=true     | 跳过错误                                                     |
 
-# 转载链接：
+# 转载链接
 
 https://sunpma.com/864.html
 
