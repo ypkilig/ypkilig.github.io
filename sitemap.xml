@@ -2,14 +2,21 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://ypkilig.com/categories/</loc><lastmod>2023-01-04T20:14:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://ypkilig.com/tags/gdrive/</loc><lastmod>2023-01-04T20:14:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://ypkilig.com/posts/</loc><lastmod>2023-01-04T20:14:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://ypkilig.com/tags/rclone/</loc><lastmod>2023-01-04T20:14:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://ypkilig.com/rclone-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%8F%82%E6%95%B0/</loc><lastmod>2023-01-04T20:14:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://ypkilig.com/tags/</loc><lastmod>2023-01-04T20:14:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://ypkilig.com/</loc><lastmod>2023-01-04T20:14:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://ypkilig.com/categories/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%8F%82%E6%95%B0/</loc><lastmod>2023-01-04T20:14:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://ypkilig.com/tags/first/</loc><lastmod>2022-12-21T10:15:49&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
-            <loc>https://ypkilig.com/hellow-word/</loc><lastmod>2022-12-21T10:15:49&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
-            <loc>https://ypkilig.com/categories/%E6%97%A5%E5%B8%B8/</loc><lastmod>2022-12-21T10:15:49&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url></urlset>
+            <loc>https://blog.ypkilig.com/categories/</loc><lastmod>2023-02-11T20:57:14&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://blog.ypkilig.com/tags/docker/</loc><lastmod>2023-02-11T20:57:14&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://blog.ypkilig.com/docker-compose%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</loc><lastmod>2023-02-11T20:57:14&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://blog.ypkilig.com/tags/linux/</loc><lastmod>2023-02-11T20:57:14&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://blog.ypkilig.com/categories/linux/</loc><lastmod>2023-02-11T20:57:14&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://blog.ypkilig.com/posts/</loc><lastmod>2023-02-11T20:57:14&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://blog.ypkilig.com/tags/</loc><lastmod>2023-02-11T20:57:14&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://blog.ypkilig.com/tags/ubuntu/</loc><lastmod>2023-02-11T20:57:14&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://blog.ypkilig.com/</loc><lastmod>2023-02-11T20:57:14&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://blog.ypkilig.com/categories/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%8F%82%E6%95%B0/</loc><lastmod>2023-02-11T20:57:14&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://blog.ypkilig.com/tags/mirror/</loc><lastmod>2023-01-15T21:43:26&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://blog.ypkilig.com/ubuntu-22.04-%E5%AE%89%E8%A3%85docker%E5%B9%B6%E6%8D%A2%E6%BA%90/</loc><lastmod>2023-01-15T21:43:26&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://blog.ypkilig.com/tags/gdrive/</loc><lastmod>2023-01-04T20:14:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://blog.ypkilig.com/tags/rclone/</loc><lastmod>2023-01-04T20:14:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://blog.ypkilig.com/rclone-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%8F%82%E6%95%B0/</loc><lastmod>2023-01-04T20:14:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://blog.ypkilig.com/tags/first/</loc><lastmod>2022-12-21T00:24:04&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://blog.ypkilig.com/hello-word/</loc><lastmod>2022-12-21T00:24:04&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://blog.ypkilig.com/categories/%E6%97%A5%E5%B8%B8/</loc><lastmod>2022-12-21T00:24:04&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url></urlset>

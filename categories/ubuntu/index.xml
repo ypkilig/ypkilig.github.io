@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Ubuntu - 分类 - YpKilig&#39;s Blog</title>
+        <link>https://blog.ypkilig.com/categories/ubuntu/</link>
+        <description>Ubuntu - 分类 - YpKilig&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ypkilig@gmail.com (YpKilig)</managingEditor>
+            <webMaster>ypkilig@gmail.com (YpKilig)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 15 Jan 2023 21:43:26 &#43;0800</lastBuildDate><atom:link href="https://blog.ypkilig.com/categories/ubuntu/" rel="self" type="application/rss+xml" /><item>
+    <title>Ubuntu 22.04 安装docker并换源</title>
+    <link>https://blog.ypkilig.com/ubuntu-22.04-%E5%AE%89%E8%A3%85docker%E5%B9%B6%E6%8D%A2%E6%BA%90/</link>
+    <pubDate>Sun, 15 Jan 2023 21:43:26 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://blog.ypkilig.com/ubuntu-22.04-%E5%AE%89%E8%A3%85docker%E5%B9%B6%E6%8D%A2%E6%BA%90/</guid>
+    <description><![CDATA[Ubuntu 22.04 安装docker并换源]]></description>
+</item>
+</channel>
+</rss>

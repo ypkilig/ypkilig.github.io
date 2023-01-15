@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Docker-Compose常用命令 - YpKilig&#39;s Blog</title><meta name="Description" content="docker-compose 的学习笔记"><meta property="og:title" content="Docker-Compose常用命令" />
+<meta property="og:description" content="docker-compose 的学习笔记" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.ypkilig.com/docker-compose%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" /><meta property="og:image" content="https://blog.ypkilig.com/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-02-11T20:57:14+08:00" />
+<meta property="article:modified_time" content="2023-02-11T20:57:14+08:00" /><meta property="og:site_name" content="YpKilig&#39;s Blog" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://blog.ypkilig.com/logo.png"/>
+
+<meta name="twitter:title" content="Docker-Compose常用命令"/>
+<meta name="twitter:description" content="docker-compose 的学习笔记"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog.ypkilig.com/docker-compose%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" /><link rel="prev" href="https://blog.ypkilig.com/ubuntu-22.04-%E5%AE%89%E8%A3%85docker%E5%B9%B6%E6%8D%A2%E6%BA%90/" /><link rel="stylesheet" href="/css/style.min.cf6878db51c51b2d04ae155284a4403dbee8db33e16c066f954c95279c271fcd.css" integrity="sha256-z2h421HFGy0ErhVShKRAPb7o2zPhbAZvlUyVJ5wnH80="><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Docker-Compose常用命令",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/blog.ypkilig.com\/docker-compose%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4\/"
+        },"genre": "posts","keywords": "docker, ubuntu, linux","wordcount":  6659 ,
+        "url": "https:\/\/blog.ypkilig.com\/docker-compose%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4\/","datePublished": "2023-02-11T20:57:14+08:00","dateModified": "2023-02-11T20:57:14+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "YpKilig","logo": "https:\/\/blog.ypkilig.com\/images\/avatar.jpg"},"author": {
+                "@type": "Person",
+                "name": "ypkilig"
+            },"description": "docker-compose 的学习笔记"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="YpKilig&#39;s Blog">YpKilig&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 归档 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="https://github.com/YPKilig" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="YpKilig&#39;s Blog">YpKilig&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">归档</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="https://github.com/YPKilig" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Docker-Compose常用命令</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/YPKilig" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ypkilig</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/linux/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>linux</a>&nbsp;<a href="/categories/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%8F%82%E6%95%B0/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>常用命令参数</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-02-11">2023-02-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 6659 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 14 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#简介">简介：</a></li>
+        <li><a href="#一常用命令">一、常用命令</a>
+          <ul>
+            <li><a href="#docker-compose">docker-compose</a></li>
+            <li><a href="#docker-compose-up">docker-compose up</a></li>
+            <li><a href="#docker-compose-ps">docker-compose ps</a></li>
+            <li><a href="#docker-compose-start">docker-compose start</a></li>
+            <li><a href="#docker-compose-stop">docker-compose stop</a></li>
+            <li><a href="#docker-compose-restart">docker-compose restart</a></li>
+            <li><a href="#docker-compose-down">docker-compose down</a></li>
+            <li><a href="#docker-compose-logs">docker-compose logs</a></li>
+            <li><a href="#docker-compose-build">docker-compose build</a></li>
+            <li><a href="#docker-compose-pull">docker-compose pull</a></li>
+            <li><a href="#docker-compose-rm">docker-compose rm</a></li>
+            <li><a href="#docker-compose-run">docker-compose run</a></li>
+          </ul>
+        </li>
+        <li><a href="#二docker-compose-模版文件">二、docker-compose 模版文件</a>
+          <ul>
+            <li><a href="#1-image">1. image</a></li>
+            <li><a href="#2-build">2. build</a></li>
+            <li><a href="#3-command">3. command</a></li>
+            <li><a href="#4-container_name">4. container_name</a></li>
+            <li><a href="#5-depends_on">5. depends_on</a></li>
+            <li><a href="#6-dns">6. dns</a></li>
+            <li><a href="#7-tmpfs">7. tmpfs</a></li>
+            <li><a href="#8-entrypoint">8. entrypoint</a></li>
+            <li><a href="#9-env_file">9. env_file</a></li>
+            <li><a href="#10-environment">10. environment</a></li>
+            <li><a href="#11-expose">11. expose</a></li>
+            <li><a href="#12-external_links">12. external_links</a></li>
+            <li><a href="#13-extra_hosts">13. extra_hosts</a></li>
+            <li><a href="#14-labels">14. labels</a></li>
+            <li><a href="#16-logging">16. logging</a></li>
+            <li><a href="#17-pid">17. pid</a></li>
+            <li><a href="#18-ports">18. ports</a></li>
+            <li><a href="#19-security_opt">19. security_opt</a></li>
+            <li><a href="#20-stop_signal">20. stop_signal</a></li>
+            <li><a href="#21-volumes">21. volumes</a></li>
+            <li><a href="#22-volumes_from">22. volumes_from</a></li>
+            <li><a href="#23-cap_add-cap_drop">23. cap_add, cap_drop</a></li>
+            <li><a href="#24-cgroup_parent">24. cgroup_parent</a></li>
+            <li><a href="#25-devices">25. devices</a></li>
+            <li><a href="#26-extends">26. extends</a></li>
+            <li><a href="#27-network_mode">27. network_mode</a></li>
+            <li><a href="#28-networks">28. networks</a></li>
+            <li><a href="#29-其它">29. 其它</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#三参考链接">三、参考链接</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="简介">简介：</h2>
+<p>Docker-Compose项目是Docker官方的开源项目，负责实现对Docker容器集群的快速编排。Compose允许用户通过一个单独的docker-compose.yml模板文件（YAML 格式）来定义一组相关联的应用容器为一个项目（project）。Docker-Compose项目由Python编写，调用Docker服务提供的API来对容器进行管理。因此，只要所操作的平台支持Docker API，就可以在其上利用Compose来进行编排管理。</p>
+<p>Docker-Compose将所管理的容器分为三层，分别是<code>工程（project）</code>，<code>服务（service）</code>以及<code>容器（container）</code>。Docker-Compose运行目录下的所有文件（docker-compose.yml，extends文件或环境变量文件等）组成一个工程，若无特殊指定工程名即为当前目录名。一个工程当中可包含多个服务，每个服务中定义了容器运行的镜像，参数，依赖。一个服务当中可包括多个容器实例，Docker-Compose并没有解决负载均衡的问题，<strong>因此需要借助其它工具实现服务发现及负载均衡</strong>。</p>
+<p>Docker-Compose的工程配置文件默认为docker-compose.yml，可通过环境变量COMPOSE_FILE或-f参数自定义配置文件，其定义了多个有依赖关系的服务及每个服务运行的容器。
+使用一个Dockerfile模板文件，可以让用户很方便的定义一个单独的应用容器。在工作中，经常会碰到需要多个容器相互配合来完成某项任务的情况。例如要实现一个Web项目，除了Web服务容器本身，往往还需要再加上后端的数据库服务容器，甚至还包括负载均衡容器等。</p>
+<h2 id="一常用命令">一、常用命令</h2>
+<h3 id="docker-compose">docker-compose</h3>
+<p>常见的命令格式如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker-compose <span class="o">[</span>-f &lt;arg&gt;...<span class="o">]</span> <span class="o">[</span>options<span class="o">]</span> <span class="o">[</span>COMMAND<span class="o">]</span> <span class="o">[</span>ARGS...<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>常见的选项包括</p>
+<ul>
+<li>-f，–file FILE指定Compose模板文件，默认为docker-compose.yml，可以多次指定。</li>
+<li>-p，–project-name NAME指定项目名称，默认将使用所在目录名称作为项目名。</li>
+<li>-x-network-driver 使用Docker的可拔插网络后端特性（需要Docker 1.9+版本）</li>
+<li>-x-network-driver DRIVER指定网络后端的驱动，默认为bridge（需要Docker 1.9+版本）</li>
+<li>-verbose输出更多调试信息</li>
+<li>-v，–version打印版本并退出</li>
+</ul>
+<h3 id="docker-compose-up">docker-compose up</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker-compose up <span class="o">[</span>options<span class="o">]</span> <span class="o">[</span>--scale <span class="nv">SERVICE</span><span class="o">=</span>NUM...<span class="o">]</span> <span class="o">[</span>SERVICE...<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>选项包括：</p>
+<ul>
+<li>-d 在后台运行服务容器</li>
+<li>–no-color 不使用颜色来区分不同的服务的控制输出</li>
+<li>–no-deps 不启动服务所链接的容器</li>
+<li>–force-recreate 强制重新创建容器，不能与–no-recreate同时使用</li>
+<li>–no-recreate 如果容器已经存在，则不重新创建，不能与–force-recreate同时使用</li>
+<li>–no-build 不自动构建缺失的服务镜像</li>
+<li>–build 在启动容器前构建服务镜像</li>
+<li>–abort-on-container-exit 停止所有容器，如果任何一个容器被停止，不能与-d同时使用</li>
+<li>-t, –timeout TIMEOUT 停止容器时候的超时（默认为10秒）</li>
+<li>–remove-orphans 删除服务中没有在compose文件中定义的容器</li>
+<li>–scale SERVICE=NUM 设置服务运行容器的个数，将覆盖在compose中通过scale指定的参数</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker-compose up
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>启动所有服务</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker-compose up -d
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在后台所有启动服务
+-f 指定使用的Compose模板文件，默认为docker-compose.yml，可以多次指定。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker-compose -f docker-compose.yml up -d
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="docker-compose-ps">docker-compose ps</h3>
+<p>列出项目中目前所有的容器</p>
+<h3 id="docker-compose-start">docker-compose start</h3>
+<p>启动已经存在的服务容器。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker-compose start <span class="o">[</span>SERVICE...<span class="o">]</span>
+</span></span><span class="line"><span class="cl">$ docker-compose start
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="docker-compose-stop">docker-compose stop</h3>
+<p>停止正在运行的容器，可以通过docker-compose start 再次启动。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker-compose stop <span class="o">[</span>options<span class="o">]</span> <span class="o">[</span>SERVICE...<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="docker-compose-restart">docker-compose restart</h3>
+<p>重启项目中的服务。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker-compose restart <span class="o">[</span>options<span class="o">]</span> <span class="o">[</span>SERVICE...<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>选项包括：</p>
+<ul>
+<li>-t, –timeout TIMEOUT，指定重启前停止容器的超时（默认为10秒）</li>
+</ul>
+<h3 id="docker-compose-down">docker-compose down</h3>
+<p>停止和删除容器、网络、卷、镜像。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker-compose down <span class="o">[</span>options<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>选项包括</p>
+<ul>
+<li>–rmi type，删除镜像，类型必须是：all，删除compose文件中定义的所有镜像；local，删除镜像名为空的镜像</li>
+<li>-v, –volumes，删除已经在compose文件中定义的和匿名的附在容器上的数据卷</li>
+<li>–remove-orphans，删除服务中没有在compose中定义的容器</li>
+</ul>
+<h3 id="docker-compose-logs">docker-compose logs</h3>
+<p>查看服务容器的输出。默认情况下，docker-compose将对不同的服务输出使用不同的颜色来区分。可以通过–no-color来关闭颜色。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker-compose logs <span class="o">[</span>options<span class="o">]</span> <span class="o">[</span>SERVICE...<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="docker-compose-build">docker-compose build</h3>
+<p>构建（重新构建）项目中的服务容器。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker-compose build <span class="o">[</span>options<span class="o">]</span> <span class="o">[</span>--build-arg <span class="nv">key</span><span class="o">=</span>val...<span class="o">]</span> <span class="o">[</span>SERVICE...<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>选项包括：</p>
+<ul>
+<li>–compress 通过gzip压缩构建上下环境</li>
+<li>–force-rm 删除构建过程中的临时容器</li>
+<li>–no-cache 构建镜像过程中不使用缓存</li>
+<li>–pull 始终尝试通过拉取操作来获取更新版本的镜像</li>
+<li>-m, –memory MEM为构建的容器设置内存大小</li>
+<li>–build-arg key=val为服务设置build-time变量</li>
+</ul>
+<h3 id="docker-compose-pull">docker-compose pull</h3>
+<p>拉取服务依赖的镜像。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker-compose pull <span class="o">[</span>options<span class="o">]</span> <span class="o">[</span>SERVICE...<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>选项包括：</p>
+<ul>
+<li>–ignore-pull-failures，忽略拉取镜像过程中的错误</li>
+<li>–parallel，多个镜像同时拉取</li>
+<li>–quiet，拉取镜像过程中不打印进度信息</li>
+</ul>
+<h3 id="docker-compose-rm">docker-compose rm</h3>
+<p>删除所有（停止状态的）服务容器。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker-compose rm <span class="o">[</span>options<span class="o">]</span> <span class="o">[</span>SERVICE...<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>选项包括：
+–f, –force，强制直接删除，包括非停止状态的容器
+-v，删除容器所挂载的数据卷</p>
+<h3 id="docker-compose-run">docker-compose run</h3>
+<p>在指定服务上执行一个命令。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker-compose run <span class="o">[</span>options<span class="o">]</span> <span class="o">[</span>-v VOLUME...<span class="o">]</span> <span class="o">[</span>-p PORT...<span class="o">]</span> <span class="o">[</span>-e <span class="nv">KEY</span><span class="o">=</span>VAL...<span class="o">]</span> SERVICE <span class="o">[</span>COMMAND<span class="o">]</span> <span class="o">[</span>ARGS...<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="二docker-compose-模版文件">二、docker-compose 模版文件</h2>
+<p>Compose允许用户通过一个docker-compose.yml模板文件（YAML 格式）来定义一组相关联的应用容器为一个项目（project）。</p>
+<p>Compose模板文件是一个定义服务、网络和卷的YAML文件。Compose模板文件默认路径是当前目录下的docker-compose.yml，可以使用.yml或.yaml作为文件扩展名。</p>
+<p>Docker-Compose标准模板文件应该包含version、services、networks 三大部分，最关键的是services和networks两个部分。</p>
+<p>先来看一份 docker-compose.yml 文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;2&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">web</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">dockercloud/hello-world</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">8080</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">front-tier</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">back-tier</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">redis</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">links</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">web</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">back-tier</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">lb</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">dockercloud/haproxy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">80</span><span class="p">:</span><span class="m">80</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">links</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">web</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">front-tier</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">back-tier</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">/var/run/docker.sock:/var/run/docker.sock </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">front-tier</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l">bridge</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">back-tier</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l">bridge</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以看到一份标准配置文件应该包含 version、services、networks 三大部分，其中最关键的就是 services 和 networks 两个部分，下面先来看 services 的书写规则。</p>
+<h3 id="1-image">1. image</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">web</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">hello-world</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>在 services 标签下的第二级标签是 web，这个名字是用户自己自定义，它就是服务名称。
+image 则是指定服务的镜像名称或镜像 ID。如果镜像在本地不存在，Compose 将会尝试拉取这个镜像。
+例如下面这些格式都是可以的：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu:14.04</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">tutum/influxdb</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">example-registry.com:4000/postgresql</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">a4bc65fd</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="2-build">2. build</h3>
+<p>服务除了可以基于指定的镜像，还可以基于一份 Dockerfile，在使用 up 启动之时执行构建任务，这个构建标签就是 build，它可以指定 Dockerfile 所在文件夹的路径。Compose 将会利用它自动构建这个镜像，然后使用这个镜像启动服务容器。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l">/path/to/build/dir</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>也可以是相对路径，只要上下文确定就可以读取到 Dockerfile。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l">./dir</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>设定上下文根目录，然后以该目录为准指定 Dockerfile。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">build</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l">../</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">dockerfile</span><span class="p">:</span><span class="w"> </span><span class="l">path/of/Dockerfile</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>注意 build 都是一个目录，如果你要指定 Dockerfile 文件需要在 build 标签的子级标签中使用 dockerfile 标签指定，如上面的例子。
+如果你同时指定了 image 和 build 两个标签，那么 Compose 会构建镜像并且把镜像命名为 image 后面的那个名字。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l">./dir</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">webapp:tag</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>既然可以在 docker-compose.yml 中定义构建任务，那么一定少不了 arg 这个标签，就像 Dockerfile 中的 ARG 指令，它可以在构建过程中指定环境变量，但是在构建成功后取消，在 docker-compose.yml 文件中也支持这样的写法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">build</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">args</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">buildno</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">secret</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>下面这种写法也是支持的，一般来说下面的写法更适合阅读。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">build</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">args</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">buildno=1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">password=secret</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>与 ENV 不同的是，ARG 是允许空值的。例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">args</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">buildno</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">password</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这样构建过程可以向它们赋值。</p>
+<blockquote>
+<p>注意：YAML 的布尔值（true, false, yes, no, on, off）必须要使用引号引起来（单引号、双引号均可），否则会当成字符串解析。</p>
+</blockquote>
+<h3 id="3-command">3. command</h3>
+<p>使用 command 可以覆盖容器启动后默认执行的命令。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">bundle exec thin -p 3000</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>也可以写成类似 Dockerfile 中的格式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">bundle, exec, thin, -p, 3000]</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="4-container_name">4. container_name</h3>
+<p>Compose 的容器名称格式是：&lt;项目名称&gt;<em>&lt;服务名称&gt;</em>&lt;序号&gt;
+虽然可以自定义项目名称、服务名称，但是如果你想完全控制容器的命名，可以使用这个标签指定：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">app</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这样容器的名字就指定为 app 了。</p>
+<h3 id="5-depends_on">5. depends_on</h3>
+<p>在使用 Compose 时，最大的好处就是少打启动命令，但是一般项目容器启动的顺序是有要求的，如果直接从上到下启动容器，必然会因为容器依赖问题而启动失败。
+例如在没启动数据库容器的时候启动了应用容器，这时候应用容器会因为找不到数据库而退出，为了避免这种情况我们需要加入一个标签，就是 depends_on，这个标签解决了容器的依赖、启动先后的问题。
+例如下面容器会先启动 redis 和 db 两个服务，最后才启动 web 服务：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;2&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">web</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">db</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">redis</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">redis</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">db</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">postgres</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>注意的是，默认情况下使用 docker-compose up web 这样的方式启动 web 服务时，也会启动 redis 和 db 两个服务，因为在配置文件中定义了依赖关系。</p>
+<h3 id="6-dns">6. dns</h3>
+<p>和 &ndash;dns 参数一样用途，格式如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">dns</span><span class="p">:</span><span class="w"> </span><span class="m">8.8.8.8</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>也可以是一个列表：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">dns</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="m">8.8.8.8</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="m">9.9.9.9</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>此外 dns_search 的配置也类似：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">dns_search</span><span class="p">:</span><span class="w"> </span><span class="l">example.com</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">dns_search</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">dc1.example.com</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">dc2.example.com</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="7-tmpfs">7. tmpfs</h3>
+<p>挂载临时目录到容器内部，与 run 的参数一样效果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">tmpfs</span><span class="p">:</span><span class="w"> </span><span class="l">/run</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">tmpfs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">/run</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">/tmp</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="8-entrypoint">8. entrypoint</h3>
+<p>在 Dockerfile 中有一个指令叫做 ENTRYPOINT 指令，用于指定接入点，第四章有对比过与 CMD 的区别。
+在 docker-compose.yml 中可以定义接入点，覆盖 Dockerfile 中的定义：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">entrypoint</span><span class="p">:</span><span class="w"> </span><span class="l">/code/entrypoint.sh</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>格式和 Docker 类似，不过还可以写成这样：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">entrypoint</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">php</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- -<span class="l">d</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20100525/xdebug.so</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- -<span class="l">d</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">memory_limit=-1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">vendor/bin/phpunit</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="9-env_file">9. env_file</h3>
+<p>.env 文件可以设置 Compose 的变量。而在 docker-compose.yml 中可以定义一个专门存放变量的文件。
+如果通过 docker-compose -f FILE 指定了配置文件，则 env_file 中路径会使用配置文件路径。</p>
+<p>如果有变量名称与 environment 指令冲突，则以后者为准。格式如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">env_file</span><span class="p">:</span><span class="w"> </span><span class="l">.env</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>或者根据 docker-compose.yml 设置多个：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">env_file</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">./common.env</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">./apps/web.env</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">/opt/secrets.env</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>注意的是这里所说的环境变量是对宿主机的 Compose 而言的，如果在配置文件中有 build 操作，这些变量并不会进入构建过程中，如果要在构建中使用变量还是首选前面刚讲的 arg 标签。</p>
+<h3 id="10-environment">10. environment</h3>
+<p>与上面的 env_file 标签完全不同，反而和 arg 有几分类似，这个标签的作用是设置镜像变量，它可以保存变量到镜像里面，也就是说启动的容器也会包含这些变量设置，这是与 arg 最大的不同。
+一般 arg 标签的变量仅用在构建过程中。而 environment 和 Dockerfile 中的 ENV 指令一样会把变量一直保存在镜像、容器中，类似 docker run -e 的效果。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">RACK_ENV</span><span class="p">:</span><span class="w"> </span><span class="l">development</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">SHOW</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;true&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">SESSION_SECRET</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">RACK_ENV=development</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">SHOW=true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">SESSION_SECRET</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="11-expose">11. expose</h3>
+<p>这个标签与Dockerfile中的EXPOSE指令一样，用于指定暴露的端口，但是只是作为一种参考，实际上docker-compose.yml的端口映射还得ports这样的标签。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">expose</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span>- <span class="s2">&#34;3000&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span>- <span class="s2">&#34;8000&#34;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="12-external_links">12. external_links</h3>
+<p>在使用Docker过程中，我们会有许多单独使用docker run启动的容器，为了使Compose能够连接这些不在docker-compose.yml中定义的容器，我们需要一个特殊的标签，就是external_links，它可以让Compose项目里面的容器连接到那些项目配置外部的容器（前提是外部容器中必须至少有一个容器是连接到与项目内的服务的同一个网络里面）。
+格式如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">external_links</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span>- <span class="l">redis_1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span>- <span class="l">project_db_1:mysql</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span>- <span class="l">project_db_1:postgresql</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="13-extra_hosts">13. extra_hosts</h3>
+<p>添加主机名的标签，就是往/etc/hosts文件中添加一些记录，与Docker client的&ndash;add-host类似：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">extra_hosts</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span>- <span class="s2">&#34;somehost:162.242.195.82&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span>- <span class="s2">&#34;otherhost:50.31.209.229&#34;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>启动之后查看容器内部hosts：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="m">162.242.195.82</span><span class="w">  </span><span class="l">somehost</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="m">50.31.209.229</span><span class="w">   </span><span class="l">otherhost</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="14-labels">14. labels</h3>
+<p>向容器添加元数据，和Dockerfile的LABEL指令一个意思，格式如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">labels</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">com</span><span class="p">.</span><span class="n">example</span><span class="p">.</span><span class="n">description</span><span class="p">:</span> <span class="s">&#34;Accounting webapp&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">com</span><span class="p">.</span><span class="n">example</span><span class="p">.</span><span class="n">department</span><span class="p">:</span> <span class="s">&#34;Finance&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">com</span><span class="p">.</span><span class="n">example</span><span class="p">.</span><span class="n">label</span><span class="p">-</span><span class="n">with</span><span class="p">-</span><span class="n">empty</span><span class="p">-</span><span class="k">value</span><span class="p">:</span> <span class="s">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">labels</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="p">-</span> <span class="s">&#34;com.example.description=Accounting webapp&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">-</span> <span class="s">&#34;com.example.department=Finance&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">-</span> <span class="s">&#34;com.example.label-with-empty-value&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="15">
+<li>links</li>
+</ol>
+<p>还记得上面的depends_on吧，那个标签解决的是启动顺序问题，这个标签解决的是容器连接问题，与Docker client的&ndash;link一样效果，会连接到其它服务中的容器。
+格式如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">links</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span>- <span class="l">db</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span>- <span class="l">db:database</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span>- <span class="l">redis</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用的别名将自动在服务容器中的/etc/hosts里创建。例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="m">172.12.2.186</span><span class="w">  </span><span class="l">db</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="m">172.12.2.186</span><span class="w">  </span><span class="l">database</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="m">172.12.2.187</span><span class="w">  </span><span class="l">redis</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>相应的环境变量也将被创建。</p>
+<h3 id="16-logging">16. logging</h3>
+<p>这个标签用于配置日志服务。格式如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">logging</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l">syslog</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">options</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">syslog-address</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;tcp://192.168.0.42:123&#34;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>默认的driver是json-file。只有json-file和journald可以通过docker-compose logs显示日志，其他方式有其他日志查看方式，但目前Compose不支持。对于可选值可以使用options指定。
+有关更多这方面的信息可以阅读官方文档：
+<a href="https://link.jianshu.com?t=https://docs.docker.com/engine/admin/logging/overview/" target="_blank" rel="noopener noreffer ">https://docs.docker.com/engine/admin/logging/overview/</a></p>
+<h3 id="17-pid">17. pid</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">pid</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;host&#34;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>将PID模式设置为主机PID模式，跟主机系统共享进程命名空间。容器使用这个标签将能够访问和操纵其他容器和宿主机的名称空间。</p>
+<h3 id="18-ports">18. ports</h3>
+<p>映射端口的标签。
+使用HOST:CONTAINER格式或者只是指定容器的端口，宿主机会随机映射端口。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span>- <span class="s2">&#34;3000&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span>- <span class="s2">&#34;8000:8000&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span>- <span class="s2">&#34;49100:22&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span>- <span class="s2">&#34;127.0.0.1:8001:8001&#34;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>注意：当使用HOST:CONTAINER格式来映射端口时，如果你使用的容器端口小于60你可能会得到错误得结果，因为YAML将会解析xx:yy这种数字格式为60进制。所以建议采用字符串格式。</p>
+</blockquote>
+<h3 id="19-security_opt">19. security_opt</h3>
+<p>为每个容器覆盖默认的标签。简单说来就是管理全部服务的标签。比如设置全部服务的user标签值为USER。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">security_opt</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">label:user:USER</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">label:role:ROLE</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="20-stop_signal">20. stop_signal</h3>
+<p>设置另一个信号来停止容器。在默认情况下使用的是SIGTERM停止容器。设置另一个信号可以使用stop_signal标签。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">stop_signal</span><span class="p">:</span><span class="w"> </span><span class="l">SIGUSR1</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="21-volumes">21. volumes</h3>
+<p>挂载一个目录或者一个已存在的数据卷容器，可以直接使用 [HOST:CONTAINER] 这样的格式，或者使用 [HOST:CONTAINER:ro] 这样的格式，后者对于容器来说，数据卷是只读的，这样可以有效保护宿主机的文件系统。
+docker-compose支持两种方式设置持久化的文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">servicename</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">image-name</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">/path/to/file:/path/to/container/file</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这种方式将文件直接挂载到容器中，使用起来比较直观，但是需要管理本地路径。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">servicename</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">image-name</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">volume-name:/path/to/container/file</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">volume-name</span><span class="p">:</span><span class="w"> </span><span class="l">/path/to/local/file</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Compose的数据卷指定路径可以是相对路径，使用 . 或者 .. 来指定相对目录。
+数据卷的格式可以是下面多种形式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">// 只是指定一个路径，Docker 会自动在创建一个数据卷（这个路径是容器内部的）。</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">/var/lib/mysql</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">// 使用绝对路径挂载数据卷</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">/opt/data:/var/lib/mysql</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">// 以 Compose 配置文件为中心的相对路径作为数据卷挂载到容器。</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">./cache:/tmp/cache</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">// 使用用户的相对路径（~/ 表示的目录是 /home/&lt;用户目录&gt;/ 或者 /root/）。</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">~/configs:/etc/configs/:ro</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">// 已经存在的命名的数据卷。</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">datavolume:/var/lib/mysql</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果你不使用宿主机的路径，你可以指定一个volume_driver。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">volume_driver</span><span class="p">:</span><span class="w"> </span><span class="l">mydriver</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用<code>docker volume ls</code>命令可以查看本地挂载的文件。
+使用<code>docker volume inspect volume-name</code>命令可以查看具体的真实地址。</p>
+<h3 id="22-volumes_from">22. volumes_from</h3>
+<p>从其它容器或者服务挂载数据卷，可选的参数是 :ro或者 :rw，前者表示容器只读，后者表示容器对数据卷是可读可写的。默认情况下是可读可写的。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">volumes_from</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">service_name</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">service_name:ro</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">container:container_name</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">container:container_name:rw</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="23-cap_add-cap_drop">23. cap_add, cap_drop</h3>
+<p>添加或删除容器的内核功能。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">cap_add</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">ALL</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">cap_drop</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">NET_ADMIN</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">SYS_ADMIN</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="24-cgroup_parent">24. cgroup_parent</h3>
+<p>指定一个容器的父级cgroup。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">cgroup_parent</span><span class="p">:</span><span class="w"> </span><span class="l">m-executor-abcd</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="25-devices">25. devices</h3>
+<p>设备映射列表。与Docker client的&ndash;device参数类似。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">devices</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="s2">&#34;/dev/ttyUSB0:/dev/ttyUSB0&#34;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="26-extends">26. extends</h3>
+<p>这个标签可以扩展另一个服务，扩展内容可以是来自在当前文件，也可以是来自其他文件，相同服务的情况下，后来者会有选择地覆盖原有配置。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">extends</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">file</span><span class="p">:</span><span class="w"> </span><span class="l">common.yml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">service</span><span class="p">:</span><span class="w"> </span><span class="l">webapp</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>用户可以在任何地方使用这个标签，只要标签内容包含file和service两个值就可以了。file的值可以是相对或者绝对路径，如果不指定file的值，那么Compose会读取当前YML文件的信息。
+更多的操作细节在后面的12.3.4小节有介绍。</p>
+<h3 id="27-network_mode">27. network_mode</h3>
+<p>网络模式，与Docker client的&ndash;net参数类似，只是相对多了一个service:[service name] 的格式。
+例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;bridge&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;host&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;none&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;service:[service name]&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;container:[container name/id]&#34;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以指定使用服务或者容器的网络。</p>
+<h3 id="28-networks">28. networks</h3>
+<p>加入指定网络，格式如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">some-service</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span>- <span class="l">some-network</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span>- <span class="l">other-network</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>关于这个标签还有一个特别的子标签aliases，这是一个用来设置服务别名的标签，例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">some-service</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">some-network</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">aliases</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">         </span>- <span class="l">alias1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">         </span>- <span class="l">alias3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">other-network</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">aliases</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">         </span>- <span class="l">alias2</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>相同的服务可以在不同的网络有不同的别名。</p>
+<h3 id="29-其它">29. 其它</h3>
+<p>还有这些标签：cpu_shares, cpu_quota, cpuset, domainname, hostname, ipc, mac_address, mem_limit, memswap_limit, privileged, read_only, restart, shm_size, stdin_open, tty, user, working_dir
+上面这些都是一个单值的标签，类似于使用docker run的效果。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">cpu_shares</span><span class="p">:</span><span class="w"> </span><span class="m">73</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">cpu_quota</span><span class="p">:</span><span class="w"> </span><span class="m">50000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">cpuset</span><span class="p">:</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="l">postgresql</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">working_dir</span><span class="p">:</span><span class="w"> </span><span class="l">/code</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">domainname</span><span class="p">:</span><span class="w"> </span><span class="l">foo.com</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="l">foo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">ipc</span><span class="p">:</span><span class="w"> </span><span class="l">host</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">mac_address</span><span class="p">:</span><span class="w"> </span><span class="m">02</span><span class="p">:</span><span class="m">42</span><span class="p">:</span><span class="l">ac:11:65:43</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">mem_limit</span><span class="p">:</span><span class="w"> </span><span class="m">1000000000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">memswap_limit</span><span class="p">:</span><span class="w"> </span><span class="m">2000000000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">privileged</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">read_only</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">shm_size</span><span class="p">:</span><span class="w"> </span><span class="l">64M</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">stdin_open</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">tty</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>Compose目前有三个版本分别为Version 1，Version 2，Version 3，Compose区分Version 1和Version 2（Compose 1.6.0+，Docker Engine 1.10.0+）。Version 2支持更多的指令。Version 1将来会被弃用。</p>
+</blockquote>
+<h1 id="三参考链接">三、参考链接</h1>
+<ul>
+<li><a href="https://www.jianshu.com/p/2217cfed29d7" target="_blank" rel="noopener noreffer ">Docker Compose 配置文件详解</a></li>
+</ul></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-02-11</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/docker-compose%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://blog.ypkilig.com/docker-compose%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" data-title="Docker-Compose常用命令" data-hashtags="docker,ubuntu,linux"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://blog.ypkilig.com/docker-compose%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" data-hashtag="docker"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://blog.ypkilig.com/docker-compose%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Instapaper" data-sharer="instapaper" data-url="https://blog.ypkilig.com/docker-compose%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" data-title="Docker-Compose常用命令" data-description="docker-compose 的学习笔记"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/instapaper.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Pocket" data-sharer="pocket" data-url="https://blog.ypkilig.com/docker-compose%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"><i class="fab fa-get-pocket fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://blog.ypkilig.com/docker-compose%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" data-title="Docker-Compose常用命令"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://blog.ypkilig.com/docker-compose%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" data-title="Docker-Compose常用命令"><i class="fab fa-evernote fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/docker/">docker</a>,&nbsp;<a href="/tags/ubuntu/">ubuntu</a>,&nbsp;<a href="/tags/linux/">linux</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/ubuntu-22.04-%E5%AE%89%E8%A3%85docker%E5%B9%B6%E6%8D%A2%E6%BA%90/" class="prev" rel="prev" title="Ubuntu 22.04 安装docker并换源"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Ubuntu 22.04 安装docker并换源</a></div>
+</div>
+<div id="comments"><div id="utterances" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/YPKilig" target="_blank">YpKilig</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/algoliasearch@4.13.1/dist/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"","lightTheme":"github-light","repo":"YpKilig/hugoblogtalks"}},"lightgallery":true,"search":{"algoliaAppID":"LSC9B1BYIR","algoliaIndex":"Blogs","algoliaSearchKey":"287710d58a4255d4c8758da8a521eee8","highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.b0df51c2c57145081cc73960e9aa780e6f5f56d06cf4ef0f96da8ce1619d1e12.js" integrity="sha256-sN9RwsVxRQgcxzlg6ap4Dm9fVtBs9O8PltqM4WGdHhI="></script></body>
+</html>

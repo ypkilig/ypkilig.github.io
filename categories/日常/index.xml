@@ -1,16 +1,16 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>日常 - 分类 - YpKilig的小站</title>
-        <link>https://ypkilig.com/categories/%E6%97%A5%E5%B8%B8/</link>
-        <description>日常 - 分类 - YpKilig的小站</description>
+        <title>日常 - 分类 - YpKilig&#39;s Blog</title>
+        <link>https://blog.ypkilig.com/categories/%E6%97%A5%E5%B8%B8/</link>
+        <description>日常 - 分类 - YpKilig&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ypkilig@gmail.com (YpKilig)</managingEditor>
-            <webMaster>ypkilig@gmail.com (YpKilig)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 21 Dec 2022 00:24:04 &#43;0800</lastBuildDate><atom:link href="https://ypkilig.com/categories/%E6%97%A5%E5%B8%B8/" rel="self" type="application/rss+xml" /><item>
-    <title>Hellow Word</title>
-    <link>https://ypkilig.com/hellow-word/</link>
+            <webMaster>ypkilig@gmail.com (YpKilig)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 21 Dec 2022 00:24:04 &#43;0800</lastBuildDate><atom:link href="https://blog.ypkilig.com/categories/%E6%97%A5%E5%B8%B8/" rel="self" type="application/rss+xml" /><item>
+    <title>Hello Word</title>
+    <link>https://blog.ypkilig.com/hello-word/</link>
     <pubDate>Wed, 21 Dec 2022 00:24:04 &#43;0800</pubDate>
-    <author>YpKilig</author>
-    <guid>https://ypkilig.com/hellow-word/</guid>
-    <description><![CDATA[Hellow Word!]]></description>
+    <author>ypkilig</author>
+    <guid>https://blog.ypkilig.com/hello-word/</guid>
+    <description><![CDATA[Hellow Word !]]></description>
 </item>
 </channel>
 </rss>

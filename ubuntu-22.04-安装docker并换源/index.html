@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Ubuntu 22.04 安装docker并换源 - YpKilig&#39;s Blog</title><meta name="Description" content="本文为笔者在 Ubuntu 22.04 安装 docker 的参考文章，在此转载以作记录"><meta property="og:title" content="Ubuntu 22.04 安装docker并换源" />
+<meta property="og:description" content="本文为笔者在 Ubuntu 22.04 安装 docker 的参考文章，在此转载以作记录" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.ypkilig.com/ubuntu-22.04-%E5%AE%89%E8%A3%85docker%E5%B9%B6%E6%8D%A2%E6%BA%90/" /><meta property="og:image" content="https://blog.ypkilig.com/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-01-15T21:43:26+08:00" />
+<meta property="article:modified_time" content="2023-01-15T21:43:26+08:00" /><meta property="og:site_name" content="YpKilig&#39;s Blog" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://blog.ypkilig.com/logo.png"/>
+
+<meta name="twitter:title" content="Ubuntu 22.04 安装docker并换源"/>
+<meta name="twitter:description" content="本文为笔者在 Ubuntu 22.04 安装 docker 的参考文章，在此转载以作记录"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog.ypkilig.com/ubuntu-22.04-%E5%AE%89%E8%A3%85docker%E5%B9%B6%E6%8D%A2%E6%BA%90/" /><link rel="prev" href="https://blog.ypkilig.com/rclone-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%8F%82%E6%95%B0/" /><link rel="next" href="https://blog.ypkilig.com/docker-compose%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" /><link rel="stylesheet" href="/css/style.min.cf6878db51c51b2d04ae155284a4403dbee8db33e16c066f954c95279c271fcd.css" integrity="sha256-z2h421HFGy0ErhVShKRAPb7o2zPhbAZvlUyVJ5wnH80="><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Ubuntu 22.04 安装docker并换源",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/blog.ypkilig.com\/ubuntu-22.04-%E5%AE%89%E8%A3%85docker%E5%B9%B6%E6%8D%A2%E6%BA%90\/"
+        },"genre": "posts","keywords": "docker, mirror, ubuntu, linux","wordcount":  2456 ,
+        "url": "https:\/\/blog.ypkilig.com\/ubuntu-22.04-%E5%AE%89%E8%A3%85docker%E5%B9%B6%E6%8D%A2%E6%BA%90\/","datePublished": "2023-01-15T21:43:26+08:00","dateModified": "2023-01-15T21:43:26+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "YpKilig","logo": "https:\/\/blog.ypkilig.com\/images\/avatar.jpg"},"author": {
+                "@type": "Person",
+                "name": "ypkilig"
+            },"description": "本文为笔者在 Ubuntu 22.04 安装 docker 的参考文章，在此转载以作记录"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="YpKilig&#39;s Blog">YpKilig&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 归档 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="https://github.com/YPKilig" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="YpKilig&#39;s Blog">YpKilig&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">归档</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="https://github.com/YPKilig" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Ubuntu 22.04 安装docker并换源</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/YPKilig" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ypkilig</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/linux/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>linux</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-15">2023-01-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 2456 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#1ubuntu-安装-docker">1.Ubuntu 安装 docker</a>
+      <ul>
+        <li><a href="#准备工作">准备工作</a>
+          <ul>
+            <li><a href="#系统要求">系统要求</a></li>
+            <li><a href="#卸载旧版本">卸载旧版本</a></li>
+          </ul>
+        </li>
+        <li><a href="#使用-apt-安装">使用 APT 安装</a>
+          <ul>
+            <li><a href="#安装-docker">安装 Docker</a></li>
+          </ul>
+        </li>
+        <li><a href="#使用脚本自动安装">使用脚本自动安装</a></li>
+        <li><a href="#启动-docker">启动 Docker</a></li>
+        <li><a href="#建立-docker-用户组">建立 docker 用户组</a></li>
+        <li><a href="#测试-docker-是否安装正确">测试 Docker 是否安装正确</a></li>
+      </ul>
+    </li>
+    <li><a href="#2镜像加速">2.镜像加速</a>
+      <ul>
+        <li><a href="#ubuntu-1604debian-8centos-7">Ubuntu 16.04+、Debian 8+、CentOS 7+</a></li>
+        <li><a href="#检查加速器是否生效">检查加速器是否生效</a></li>
+        <li><a href="#k8sgcrio-镜像"><code>k8s.gcr.io</code> 镜像</a></li>
+        <li><a href="#不再提供服务的镜像">不再提供服务的镜像</a></li>
+        <li><a href="#云服务商">云服务商</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-docker-compose安装">3. docker-compose安装</a>
+      <ul>
+        <li><a href="#compose-简介">Compose 简介</a></li>
+        <li><a href="#compose-使用的三个步骤">Compose 使用的三个步骤</a>
+          <ul>
+            <li><a href="#实例">实例</a></li>
+          </ul>
+        </li>
+        <li><a href="#compose-安装">Compose 安装</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-参考链接">4. 参考链接</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="1ubuntu-安装-docker">1.Ubuntu 安装 docker</h1>
+<blockquote>
+<p>警告：切勿在没有配置 Docker APT 源的情况下直接使用 apt 命令安装 Docker.</p>
+</blockquote>
+<h2 id="准备工作">准备工作</h2>
+<h3 id="系统要求">系统要求</h3>
+<p>本次安装操作系统为：</p>
+<ul>
+<li>Ubuntu Server 22.04 LTS 64bit</li>
+</ul>
+<p>Docker 可以安装在 64 位的 x86 平台或 ARM 平台上。Ubuntu 发行版中，LTS（Long-Term-Support）长期支持版本，会获得 5 年的升级维护支持，这样的版本会更稳定，因此在生产环境中推荐使用 LTS 版本。</p>
+<h3 id="卸载旧版本">卸载旧版本</h3>
+<p>旧版本的 Docker 称为 <code>docker</code> 或者 <code>docker-engine</code>，使用以下命令卸载旧版本：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ sudo apt-get remove docker <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>                docker-engine <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>                docker.io
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="使用-apt-安装">使用 APT 安装</h2>
+<p>由于 <code>apt</code> 源使用 HTTPS 以确保软件下载过程中不被篡改。因此，我们首先需要添加使用 HTTPS 传输的软件包以及 CA 证书。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ sudo apt-get update
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ sudo apt-get install <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>     apt-transport-https <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>     ca-certificates <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>     curl <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>     gnupg <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>     lsb-release
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>鉴于国内网络问题，强烈建议使用国内源，官方源请在注释中查看。</p>
+<p>为了确认所下载软件包的合法性，需要添加软件源的 <code>GPG</code> 密钥。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ curl -fsSL https://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg <span class="p">|</span> sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 官方源</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后，我们需要向 <code>sources.list</code> 中添加 Docker 软件源</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ <span class="nb">echo</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  <span class="s2">&#34;deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://mirrors.aliyun.com/docker-ce/linux/ubuntu \
+</span></span></span><span class="line"><span class="cl"><span class="s2">  </span><span class="k">$(</span>lsb_release -cs<span class="k">)</span><span class="s2"> stable&#34;</span> <span class="p">|</span> sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 官方源</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># $ echo \</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#   &#34;deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#   $(lsb_release -cs) stable&#34; | sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>以上命令会添加稳定版本的 Docker APT 镜像源，如果需要测试版本的 Docker 请将 stable 改为 test。</p>
+</blockquote>
+<h3 id="安装-docker">安装 Docker</h3>
+<p>更新 apt 软件包缓存，并安装 <code>docker-ce</code>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ sudo apt-get update
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ sudo apt-get install docker-ce docker-ce-cli containerd.io
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="使用脚本自动安装">使用脚本自动安装</h2>
+<p>在测试或开发环境中 Docker 官方为了简化安装流程，提供了一套便捷的安装脚本，Ubuntu 系统上可以使用这套脚本安装，另外可以通过 <code>--mirror</code> 选项使用国内源进行安装：</p>
+<blockquote>
+<p>若你想安装测试版的 Docker, 请从 test.docker.com 获取脚本</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># $ curl -fsSL test.docker.com -o get-docker.sh</span>
+</span></span><span class="line"><span class="cl">$ curl -fsSL get.docker.com -o get-docker.sh
+</span></span><span class="line"><span class="cl">$ sudo sh get-docker.sh --mirror Aliyun
+</span></span><span class="line"><span class="cl"><span class="c1"># $ sudo sh get-docker.sh --mirror AzureChinaCloud</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>执行这个命令后，脚本就会自动的将一切准备工作做好，并且把 Docker 的稳定(stable)版本安装在系统中。</p>
+<h2 id="启动-docker">启动 Docker</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ sudo systemctl <span class="nb">enable</span> docker
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ sudo systemctl start docker
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="建立-docker-用户组">建立 docker 用户组</h2>
+<p>默认情况下，<code>docker</code> 命令会使用 <a href="https://en.wikipedia.org/wiki/Unix_domain_socket" target="_blank" rel="noopener noreffer ">Unix socket</a> 与 Docker 引擎通讯。而只有 <code>root</code> 用户和 <code>docker</code> 组的用户才可以访问 Docker 引擎的 Unix socket。出于安全考虑，一般 Linux 系统上不会直接使用 <code>root</code> 用户。因此，更好地做法是将需要使用 <code>docker</code> 的用户加入 <code>docker</code> 用户组。</p>
+<p>建立 <code>docker</code> 组：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ sudo groupadd docker
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>将当前用户加入 <code>docker</code> 组：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ sudo usermod -aG docker <span class="si">${</span><span class="nv">USER</span><span class="si">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>退出当前终端并重新登录，进行如下测试。</p>
+<h2 id="测试-docker-是否安装正确">测试 Docker 是否安装正确</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ docker run --rm hello-world
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Unable to find image <span class="s1">&#39;hello-world:latest&#39;</span> locally
+</span></span><span class="line"><span class="cl">latest: Pulling from library/hello-world
+</span></span><span class="line"><span class="cl">b8dfde127a29: Pull <span class="nb">complete</span>
+</span></span><span class="line"><span class="cl">Digest: sha256:308866a43596e83578c7dfa15e27a73011bdd402185a84c5cd7f32a88b501a24
+</span></span><span class="line"><span class="cl">Status: Downloaded newer image <span class="k">for</span> hello-world:latest
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Hello from Docker!
+</span></span><span class="line"><span class="cl">This message shows that your installation appears to be working correctly.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">To generate this message, Docker took the following steps:
+</span></span><span class="line"><span class="cl"> 1. The Docker client contacted the Docker daemon.
+</span></span><span class="line"><span class="cl"> 2. The Docker daemon pulled the <span class="s2">&#34;hello-world&#34;</span> image from the Docker Hub.<span class="o">(</span>amd64<span class="o">)</span>
+</span></span><span class="line"><span class="cl"> 3. The Docker daemon created a new container from that image which runs the executable  	 that produces the output you are currently reading.
+</span></span><span class="line"><span class="cl"> 4. The Docker daemon streamed that output to the Docker client, which sent it to your 		terminal.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">To try something more ambitious, you can run an Ubuntu container with:
+</span></span><span class="line"><span class="cl"> $ docker run -it ubuntu bash
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Share images, automate workflows, and more with a free Docker ID:
+</span></span><span class="line"><span class="cl"> https://hub.docker.com/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">For more examples and ideas, visit:
+</span></span><span class="line"><span class="cl"> https://docs.docker.com/get-started/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>若能正常输出以上信息，则说明安装成功。</p>
+<h1 id="2镜像加速">2.镜像加速</h1>
+<p>如果在使用过程中发现拉取 Docker 镜像十分缓慢，可以配置 Docker 国内镜像加速。</p>
+<p>国内从 Docker Hub 拉取镜像有时会遇到困难，此时可以配置镜像加速器。国内很多云服务商都提供了国内加速器服务，例如：</p>
+<ul>
+<li><a href="https://www.aliyun.com/product/acr?source=5176.11533457&amp;userCode=8lx5zmtu" target="_blank" rel="noopener noreffer ">阿里云加速器(点击管理控制台 -&gt; 登录账号(淘宝账号) -&gt; 右侧镜像工具 -&gt; 镜像加速器 -&gt; 复制加速器地址)</a></li>
+<li><a href="https://www.163yun.com/help/documents/56918246390157312" target="_blank" rel="noopener noreffer ">网易云加速器 <code>https://hub-mirror.c.163.com</code></a></li>
+<li><a href="https://cloud.baidu.com/doc/CCE/s/Yjxppt74z#%e4%bd%bf%e7%94%a8dockerhub%e5%8a%a0%e9%80%9f%e5%99%a8" target="_blank" rel="noopener noreffer ">百度云加速器 <code>https://mirror.baidubce.com</code></a></li>
+</ul>
+<p><strong>由于镜像服务可能出现宕机，建议同时配置多个镜像。各个镜像站测试结果请到</strong> <a href="https://github.com/docker-practice/docker-registry-cn-mirror-test/actions" target="_blank" rel="noopener noreffer "><strong>docker-practice/docker-registry-cn-mirror-test</strong></a> <strong>查看。</strong></p>
+<blockquote>
+<p>国内各大云服务商（腾讯云、阿里云、百度云）均提供了 Docker 镜像加速服务，建议根据运行 Docker 的云平台选择对应的镜像加速服务，具体请参考本页最后一小节。</p>
+</blockquote>
+<p>本节我们以 <a href="https://www.163yun.com/" target="_blank" rel="noopener noreffer ">网易云</a> 镜像服务 <code>https://hub-mirror.c.163.com</code> 为例进行介绍。</p>
+<h2 id="ubuntu-1604debian-8centos-7">Ubuntu 16.04+、Debian 8+、CentOS 7+</h2>
+<p>目前主流 Linux 发行版均已使用 <a href="https://systemd.io/" target="_blank" rel="noopener noreffer ">systemd</a> 进行服务管理，这里介绍如何在使用 systemd 的 Linux 发行版中配置镜像加速器。</p>
+<p>请首先执行以下命令，查看是否在 <code>docker.service</code> 文件中配置过镜像地址。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ systemctl cat docker <span class="p">|</span> grep <span class="s1">&#39;\-\-registry\-mirror&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果该命令有输出，那么请执行 <code>$ systemctl cat docker</code> 查看 <code>ExecStart=</code> 出现的位置，修改对应的文件内容去掉 <code>--registry-mirror</code> 参数及其值，并按接下来的步骤进行配置。</p>
+<p>如果以上命令没有任何输出，那么就可以在 <code>/etc/docker/daemon.json</code> 中写入如下内容（如果文件不存在请新建该文件）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;registry-mirrors&#34;</span>: 
+</span></span><span class="line"><span class="cl">     <span class="s2">&#34;https://hub-mirror.c.163.com&#34;</span>,
+</span></span><span class="line"><span class="cl">     <span class="s2">&#34;https://mirror.baidubce.com&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>注意，一定要保证该文件符合 json 规范，否则 Docker 将不能启动。</p>
+</blockquote>
+<p>之后重新启动服务。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ sudo systemctl daemon-reload
+</span></span><span class="line"><span class="cl">$ sudo systemctl restart docke
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="检查加速器是否生效">检查加速器是否生效</h2>
+<p>执行 <code>$ docker info</code>，如果从结果中看到了如下内容，说明配置成功。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">Registry Mirrors:
+</span></span><span class="line"><span class="cl"> https://hub-mirror.c.163.com/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="k8sgcrio-镜像"><code>k8s.gcr.io</code> 镜像</h2>
+<p>可以登录 <a href="https://www.aliyun.com/product/acr?source=5176.11533457&amp;userCode=8lx5zmtu&amp;type=copy" target="_blank" rel="noopener noreffer ">阿里云 容器镜像服务</a> <strong>镜像中心</strong> -&gt; <strong>镜像搜索</strong> 查找。</p>
+<p>例如 <code>k8s.gcr.io/coredns:1.6.7</code> 镜像可以用 <code>registry.cn-hangzhou.aliyuncs.com/google_containers/coredns:1.6.7</code> 代替。</p>
+<p>一般情况下有如下对应关系：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># $ docker pull k8s.gcr.io/xxx</span>
+</span></span><span class="line"><span class="cl">$ docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/xxx
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="不再提供服务的镜像">不再提供服务的镜像</h2>
+<p>某些镜像不再提供服务，添加无用的镜像加速器，会拖慢镜像拉取速度，你可以从镜像配置列表中删除它们。</p>
+<ul>
+<li><a href="https://dockerhub.azk8s.cn" target="_blank" rel="noopener noreffer ">https://dockerhub.azk8s.cn</a> <strong>已转为私有</strong></li>
+<li><a href="https://reg-mirror.qiniu.com" target="_blank" rel="noopener noreffer ">https://reg-mirror.qiniu.com</a></li>
+<li><a href="https://registry.docker-cn.com" target="_blank" rel="noopener noreffer ">https://registry.docker-cn.com</a></li>
+</ul>
+<p>建议 <strong>watch（页面右上角）</strong> <a href="https://github.com/docker-practice/docker-registry-cn-mirror-test" target="_blank" rel="noopener noreffer ">镜像测试</a> 这个 GitHub 仓库，会更新各个镜像地址的状态。</p>
+<h2 id="云服务商">云服务商</h2>
+<p>某些云服务商提供了 <strong>仅供内部</strong> 访问的镜像服务，当您的 Docker 运行在云平台时可以选择它们。</p>
+<ul>
+<li><a href="https://github.com/Azure/container-service-for-azure-china/blob/master/aks/README.md#22-container-registry-proxy" target="_blank" rel="noopener noreffer ">Azure 中国镜像 <code>https://dockerhub.azk8s.cn</code></a></li>
+<li><a href="https://cloud.tencent.com/act/cps/redirect?redirect=10058&amp;cps_key=3a5255852d5db99dcd5da4c72f05df61" target="_blank" rel="noopener noreffer ">腾讯云 <code>https://mirror.ccs.tencentyun.com</code></a></li>
+</ul>
+<h1 id="3-docker-compose安装">3. docker-compose安装</h1>
+<h2 id="compose-简介">Compose 简介</h2>
+<p>Compose 是用于定义和运行多容器 Docker 应用程序的工具。通过 Compose，您可以使用 YML 文件来配置应用程序需要的所有服务。然后，使用一个命令，就可以从 YML 文件配置中创建并启动所有服务。</p>
+<p>如果你还不了解 YML 文件配置，可以先阅读 <a href="https://www.runoob.com/w3cnote/yaml-intro.html" target="_blank" rel="noopener noreffer ">YAML 入门教程</a>。</p>
+<h2 id="compose-使用的三个步骤">Compose 使用的三个步骤</h2>
+<ul>
+<li>使用 Dockerfile 定义应用程序的环境。</li>
+<li>使用 docker-compose.yml 定义构成应用程序的服务，这样它们可以在隔离环境中一起运行。</li>
+<li>最后，执行 docker-compose up 命令来启动并运行整个应用程序。</li>
+</ul>
+<p>docker-compose.yml 的配置案例如下（配置参数参考下文）：</p>
+<h3 id="实例">实例</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># yaml 配置实例</span>
+</span></span><span class="line"><span class="cl">version: <span class="s1">&#39;3&#39;</span>
+</span></span><span class="line"><span class="cl">services:
+</span></span><span class="line"><span class="cl"> web:
+</span></span><span class="line"><span class="cl">  build: .
+</span></span><span class="line"><span class="cl">  ports:
+</span></span><span class="line"><span class="cl">  - <span class="s2">&#34;5000:5000&#34;</span>
+</span></span><span class="line"><span class="cl">  volumes:
+</span></span><span class="line"><span class="cl">  - .:/code
+</span></span><span class="line"><span class="cl">  - logvolume01:/var/log
+</span></span><span class="line"><span class="cl">  links:
+</span></span><span class="line"><span class="cl">  - redis
+</span></span><span class="line"><span class="cl"> redis:
+</span></span><span class="line"><span class="cl">  image: redis
+</span></span><span class="line"><span class="cl">volumes:
+</span></span><span class="line"><span class="cl"> logvolume01: <span class="o">{}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="compose-安装">Compose 安装</h2>
+<p>Linux 上我们可以从 Github 上下载它的二进制包来使用，最新发行的版本地址：https://github.com/docker/compose/releases。</p>
+<p>运行以下命令以下载 Docker Compose 的当前稳定版本：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ sudo curl -L <span class="s2">&#34;https://github.com/docker/compose/releases/download/v2.2.2/docker-compose-</span><span class="k">$(</span>uname -s<span class="k">)</span><span class="s2">-</span><span class="k">$(</span>uname -m<span class="k">)</span><span class="s2">&#34;</span> -o /usr/local/bin/docker-compose
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>要安装其他版本的 Compose，请替换 v2.2.2。</p>
+<blockquote>
+<p>Docker Compose 存放在 GitHub，不太稳定。</p>
+<p>你可以也通过执行下面的命令，高速安装 Docker Compose。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">curl -L https://get.daocloud.io/docker/compose/releases/download/v2.4.1/docker-compose-<span class="sb">`</span>uname -s<span class="sb">`</span>-<span class="sb">`</span>uname -m<span class="sb">`</span> &gt; /usr/local/bin/docker-compose
+</span></span></code></pre></td></tr></table>
+</div>
+</div></blockquote>
+<p>将可执行权限应用于二进制文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ sudo chmod +x /usr/local/bin/docker-compose
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>创建软链：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>测试是否安装成功：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ docker-compose version
+</span></span><span class="line"><span class="cl">cker-compose version 1.24.1, build 4667896b
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>注意</strong>： 对于 alpine，需要以下依赖包： py-pip，python-dev，libffi-dev，openssl-dev，gcc，libc-dev，和 make。</p>
+<h1 id="4-参考链接">4. 参考链接</h1>
+<ul>
+<li><a href="https://yeasy.gitbook.io/docker_practice/install/ubuntu" target="_blank" rel="noopener noreffer ">https://yeasy.gitbook.io/docker_practice/install/ubuntu</a></li>
+<li><a href="https://yeasy.gitbook.io/docker_practice/install/mirror" target="_blank" rel="noopener noreffer ">https://yeasy.gitbook.io/docker_practice/install/mirror</a></li>
+</ul></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-01-15</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/ubuntu-22.04-%E5%AE%89%E8%A3%85docker%E5%B9%B6%E6%8D%A2%E6%BA%90/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://blog.ypkilig.com/ubuntu-22.04-%E5%AE%89%E8%A3%85docker%E5%B9%B6%E6%8D%A2%E6%BA%90/" data-title="Ubuntu 22.04 安装docker并换源" data-hashtags="docker,mirror,ubuntu,linux"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://blog.ypkilig.com/ubuntu-22.04-%E5%AE%89%E8%A3%85docker%E5%B9%B6%E6%8D%A2%E6%BA%90/" data-hashtag="docker"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://blog.ypkilig.com/ubuntu-22.04-%E5%AE%89%E8%A3%85docker%E5%B9%B6%E6%8D%A2%E6%BA%90/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Instapaper" data-sharer="instapaper" data-url="https://blog.ypkilig.com/ubuntu-22.04-%E5%AE%89%E8%A3%85docker%E5%B9%B6%E6%8D%A2%E6%BA%90/" data-title="Ubuntu 22.04 安装docker并换源" data-description="本文为笔者在 Ubuntu 22.04 安装 docker 的参考文章，在此转载以作记录"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/instapaper.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Pocket" data-sharer="pocket" data-url="https://blog.ypkilig.com/ubuntu-22.04-%E5%AE%89%E8%A3%85docker%E5%B9%B6%E6%8D%A2%E6%BA%90/"><i class="fab fa-get-pocket fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://blog.ypkilig.com/ubuntu-22.04-%E5%AE%89%E8%A3%85docker%E5%B9%B6%E6%8D%A2%E6%BA%90/" data-title="Ubuntu 22.04 安装docker并换源"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://blog.ypkilig.com/ubuntu-22.04-%E5%AE%89%E8%A3%85docker%E5%B9%B6%E6%8D%A2%E6%BA%90/" data-title="Ubuntu 22.04 安装docker并换源"><i class="fab fa-evernote fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/docker/">docker</a>,&nbsp;<a href="/tags/mirror/">mirror</a>,&nbsp;<a href="/tags/ubuntu/">ubuntu</a>,&nbsp;<a href="/tags/linux/">linux</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/rclone-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%8F%82%E6%95%B0/" class="prev" rel="prev" title="Rclone 常用命令参数"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Rclone 常用命令参数</a>
+            <a href="/docker-compose%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="next" rel="next" title="Docker-Compose常用命令">Docker-Compose常用命令<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="utterances" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/YPKilig" target="_blank">YpKilig</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/algoliasearch@4.13.1/dist/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"","lightTheme":"github-light","repo":"YpKilig/hugoblogtalks"}},"lightgallery":true,"search":{"algoliaAppID":"LSC9B1BYIR","algoliaIndex":"Blogs","algoliaSearchKey":"287710d58a4255d4c8758da8a521eee8","highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.b0df51c2c57145081cc73960e9aa780e6f5f56d06cf4ef0f96da8ce1619d1e12.js" integrity="sha256-sN9RwsVxRQgcxzlg6ap4Dm9fVtBs9O8PltqM4WGdHhI="></script></body>
+</html>
